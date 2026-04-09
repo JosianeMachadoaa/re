@@ -1,0 +1,113 @@
+:root {
+  --background-contrast-dark: #181818;  
+  --color-contrast-dark: #fff;  
+  --background_contrast_clear: #fff;  
+  --color_contrast_clear: #27272d;  
+}
+.perto_high_contrast_dark .card-evento,
+.perto_high_contrast_dark .nome-artista,
+.perto_high_contrast_dark .carousel-caption,
+.perto_high_contrast_dark .card-step-form,
+.perto_high_contrast_dark .modal-localiza-header,
+.perto_high_contrast_dark .loca-estado,
+.perto_high_contrast_dark #area-textos-geren {
+  background-color: var(--background-contrast-dark); 
+}
+.perto_high_contrast_dark .btn-genero-heaer a,
+.perto_high_contrast_dark .titulo-step-com,
+.perto_high_contrast_dark .form-texto-card,
+.perto_high_contrast_dark .total-resum-ing,
+.perto_high_contrast_dark .text-part-login b {
+  color: var(--color-contrast-dark);
+}
+.perto_high_contrast_dark .area-alert-ing,
+.perto_high_contrast_dark .area-data-hor,
+.perto_high_contrast_dark .area-compartilha,
+.perto_high_contrast_dark .area-newsletter,
+.perto_high_contrast_dark #accordionDadosTex .card-texto,
+.perto_high_contrast_dark .sele-resu-pedido,
+.perto_high_contrast_dark .instrucoes-pix,
+.perto_high_contrast_dark .card-big-user {
+  background-color: var(--background-contrast-dark);
+  border: 1px solid var(--color-contrast-dark);
+}
+.perto_high_contrast_dark .btn-news {
+  z-index: 1;
+}
+.perto_high_contrast_dark .carousel-control-prev,
+.perto_high_contrast_dark .carousel-control-next,
+.perto_high_contrast_clear .carousel-control-prev,
+.perto_high_contrast_clear .carousel-control-next {
+  display: none;
+}
+.perto_high_contrast_clear .carousel-caption,
+.perto_high_contrast_clear .nome-artista,
+.perto_high_contrast_clear .area-newsletter {
+  background-color: var(--background_contrast_clear);
+}
+.perto_high_contrast_clear .btn-compra-banner {
+  background-color: var(--color_contrast_clear);
+  color: var(--color-contrast-dark);
+}
+.perto_high_contrast_clear .area-pesquisa-header .btn-outline {
+  border: 2px solid var(--color_contrast_clear);
+}
+.perto_high_contrast_clear .area-alert-ing,
+.perto_high_contrast_clear .area-newsletter,
+.perto_high_contrast_clear .sele-resu-pedido,
+.perto_high_contrast_clear .card-resu-pedido {
+  border: 1px solid var(--color_contrast_clear);
+}
+.perto_high_contrast_clear .btn-news {
+  background-color: var(--color_contrast_clear);
+  color: var(--background_contrast_clear); 
+  z-index: 1;
+}
+body.perto_high_contrast_clear div:nth-child(1) > div > div.col-md-6.div-contrast_clear,
+body.perto_high_contrast_clear div:nth-child(1) > div > div.col-md-6.img-lateral-news,
+body.perto_high_contrast_clear div:nth-child(1) > div > div.col-md-6.limpa-background,
+body.perto_high_contrast_clear div:nth-child(1) > div > div.col-md-6.arruma-background {
+  background-color: transparent!important;
+}
+.perto_high_contrast_dark #accordionDadosTex .card-texto,
+.perto_high_contrast_dark .area-ingresso-individual,
+.perto_high_contrast_dark .card-resu-pedido,
+.perto_high_contrast_dark .card-indi-login {
+  background: var(--background-contrast-dark);
+  border: 1px solid var(--color-contrast-dark);
+}
+.perto_high_contrast_clear .area-data-hor {
+  background: var(--background_contrast_clear);
+  border: 1px solid var(--color_contrast_clear);
+}
+.perto_high_contrast_clear #accordionDatHor .btn-datas {
+  border: 1px solid;
+}
+.perto_high_contrast_clear #accordionDatHor .btn-datas.clicavelHora,
+.perto_high_contrast_clear #accordionDatHor .btn-datas.clicavelData {
+  border: 1px solid var(--color_contrast_clear);
+  color: var(--color_contrast_clear);
+}
+.perto_contrast_mode .text-part-login b {
+  color: var(--color-contrast-dark);
+}
+.perto_read_mode_1 .icone-whats-flut {
+  display: none!important;
+}
+/* ocultar img do modo leitura */
+#pertoReadModeContent img[src*="whats.png"],
+#pertoReadModeContent img[src*="bolinhas.png"],
+#pertoReadModeContent img[src*="mascaras.png"],
+#pertoReadModeContent img[src*="musica.png"],
+#pertoReadModeContent img[src*="smille.png"],
+#pertoReadModeContent img[src*="estrela.png"],
+#pertoReadModeContent img[src*="violao.png"],
+#pertoReadModeContent img[src*="microfone.png"],
+#pertoReadModeContent img[src*="igreja.png"],
+#pertoReadModeContent img[src*="locale-card.png"] {
+  display: none !important;
+}
+
+
+
+

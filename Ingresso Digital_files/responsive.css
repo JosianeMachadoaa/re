@@ -1,0 +1,580 @@
+@media(max-width: 600px) {
+  .area-pesquisa-header {
+    flex-flow: nowrap;
+  }
+  .btn-a-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /*margin-top: 1rem;*/
+    position: absolute;
+    top: 12px;
+    right: 10px;
+  }
+  .btn-a-header .off {
+    margin-top: 1rem;
+  }
+  .btn-cadast-header {
+    display: none;
+  }
+  .carousel-control-next, .carousel-control-prev {
+    margin-bottom: 1rem;
+  }
+  .ri-arrow-drop-left-line, .ri-arrow-drop-right-line {
+    width: 35px;
+    height: 35px;
+  }
+  .ri-arrow-drop-left-line, .ri-arrow-drop-right-line {
+    font-size: 35px;
+  }
+  .carousel-control-prev {
+    right: 6rem;
+  }
+  .slides-generos {
+    padding: 1.5rem;
+  }
+  footer h4 {
+    margin-top: 2rem;
+  }
+  .img-lateral-news {
+    display: none!important;
+  }
+  .posiciona-dados-news {
+    padding: 2rem;
+  }
+  .input-news-1,
+  .input-news-2  {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .area-newsletter .row {
+    display: grid;
+  }
+  .area-newsletter {
+    margin-bottom: -15rem !important;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+  .img-fundo-pont {
+    width: 100%;
+  }
+  #parte-alert-ing-mail {
+    margin: 4rem 1rem;
+  }
+  /*.div-m-alert {
+    display: none;
+  }*/
+  .boximgprod {
+    min-height: 265px;
+  }
+  .info-pord h5 {
+    font-size: 14px;
+  }
+  .info-pord p {
+    font-size: 13px;
+  }
+  .btn-ver-mais-prod button {
+    float: right;
+  }
+  .barra-dado-pro-evento i {
+    display: none;
+  }
+}
+@media(min-width: 601px) {
+  .area-pesquisa-header input {
+    min-width: 520px;
+  }
+  .carousel-control-next, .carousel-control-prev {
+    margin-bottom: 3rem;
+  }
+  .ri-arrow-drop-left-line, .ri-arrow-drop-right-line {
+    width: 55px;
+    height: 55px;
+  }
+  .ri-arrow-drop-left-line, .ri-arrow-drop-right-line {
+    font-size: 50px;
+  }
+  .carousel-control-prev {
+    right: 7rem;
+  }
+  .slides-generos {
+    padding: 1.5rem;
+  }
+  .input-news-1 {
+    border-radius: 8px 0px 0px 8px;
+  }
+  .input-news-2 {
+    border-radius: 0px 8px 8px 0px;
+  }
+  .area-newsletter {
+    margin-bottom: -15rem !important;
+  }
+  .input-news-1,
+  .input-news-2 {
+    min-width: 238px;
+  }
+  .posiciona-dados-news {
+    margin-left: 3rem;
+    margin-top: 3rem;
+  }
+  .area-newsletter form {
+    display: flex;
+  }
+  .img-text-alert-ing p {
+    max-width: 445px;
+  }
+  #parte-alert-ing-mail {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+  }
+  .boximgprod {
+    min-height: 580px;
+  }
+  .info-pord p,
+  .info-pord h5 {
+    font-size: 16px;
+  }
+  .ajuste-dad-prod-e {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media(min-width: 750px) and (max-width: 900px) {
+  .input-news-1, .input-news-2 {
+    min-width: 38px;
+    max-width: 165px;
+    margin-bottom: 1rem;
+  }
+  .posiciona-dados-news {
+    margin: 2rem;
+  }
+  .img-lateral-news {
+    display: none;
+  }
+}
+@media (min-width: 576px) {
+  #modalLocalizacao .modal-dialog {
+    max-width: 540px;
+  }
+  .titulo-step-com,
+  .titulo-step-com-fake {
+    font-size: 24px;
+  }
+  .sele-resu-pedido {
+    padding: 40px;
+  }
+  .time-final-compr {
+    margin-right: 30px;
+  }
+}
+@media(max-width: 700px) {
+  /*.ajuste-time-mob {
+    position: absolute;
+  }*/
+  /*.logo-menu-dois {
+    margin: 1rem auto;
+  }*/
+  .titulo-step-com,
+  .titulo-step-com-fake {
+    font-size: 22px;
+  }
+  .sele-resu-pedido {
+    padding: 25px;
+  }
+  .ajuste-local {
+    display: grid;
+  }
+  .card-indi-login {
+    padding: 2rem;
+  }
+  .sinal-step-form {
+    display: grid;
+  }
+  .sinal-step-form .step {
+    margin-bottom: 10px;
+  }
+  .header-evento {
+    height: 250px;
+  }
+  .loca-conta-artista {
+    display: grid;
+  }
+  .loca-conta-artista li {
+    margin-bottom: 10px;
+  }
+  #pills-tab-menu-user {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+  .area-data-hor {
+    width: 100%;
+  }
+  .sobe-div-valor {
+    flex-direction: column;
+  }
+  .sobe-div-valor .order-posi-3 {
+    order: 3;
+  }
+  .sobe-div-valor .order-posi-2 {
+    order: 2;
+    margin-top: 2rem;
+    /*margin-bottom: 11rem;*/
+  }
+  .ajuste-espaco-detalhe {
+    margin-top: 3rem;
+  }
+  .cad-top-artista img {
+    min-height: 155px;
+  } 
+  .img-banner-mobile {
+    display: flex;
+  }
+  .img-banner-desktop {
+    display: none;
+  }
+  .engloba-tit-btn {
+    display: grid;
+    justify-content: normal;
+  }
+  .quantity {
+    justify-content: end;
+    margin: 10px 0;
+  }
+}
+@media(min-width: 701px) {
+  .engloba-tit-btn {
+    justify-content: space-between;
+    display: flex;
+  }
+  .img-banner-mobile {
+    display: none;
+  }
+  .img-banner-desktop {
+    display: flex;
+  }
+  .ajuste-local {
+    display: flex;
+  }
+  .card-indi-login {
+    padding: 4rem;
+  }
+  .header-evento {
+    height: 368px;
+  }
+  .loca-conta-artista {
+    display: inline-flex;
+  }
+  .loca-conta-artista li {
+    border-right: 1px solid #ccc;
+    padding: 0px 20px;
+  }
+  .area-data-hor {
+    width: 420px;
+  }
+  .ajuste-espaco-detalhe {
+    margin-top: 13rem;
+  } 
+  /*.cad-top-artista img {
+    height: 200px;
+  } */
+}
+@media(min-width: 768px) and (max-width: 1100px) {
+  .area-newsletter .col-md-6 {
+    max-width: 100%;
+  }
+  .conteudo-form-alerta .form-row {
+    display: grid;
+  }
+  .conteudo-form-alerta .col-md-5 {
+    max-width: 100%;
+  }
+  .area-newsletter .row {
+    width: 100%;
+  }
+}
+@media(max-width: 600px) {
+  #carrouselBanerEvento .carousel-caption {
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  } 
+  .img-banner-carrosel {
+    border-radius: 24px 24px 0px 0px;
+  }
+  #carrouselBanerEvento .carousel-item {
+    background-color: #000000A9;
+    border-radius: 24px;
+    /*background-position: center;*/
+    background-repeat: no-repeat;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: relative;
+    bottom: 0;
+    margin: 1rem 1rem 0rem 1rem;
+  }
+  .btn-passa-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*margin-top: 1rem;*/
+  }
+   .btn-compra-banner {
+    width: 100%;
+  }
+  .area-alert-ing {
+    padding: 0;
+  }
+  .icone-al-ing {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1.5rem;
+  }
+  .btn-alerta-ing {
+    width: 100%;
+  }
+  #pills-pag-selec .nav-link {
+    position: relative;
+    width: 120px;
+  }
+  .ico {
+    position: absolute;
+    right: 3px;
+  }
+  .carousel-caption {
+    padding: 15px;
+  }
+  .card-evento {
+    margin: 5px;
+    /*height: 230px;*/
+    height: auto!important;
+  }
+  .card-evento-img {
+    min-height: 120px;
+  }
+  .hover-cards-pos {
+    max-height: 315px;
+    margin-top: 2rem;
+  }
+  .area-cont-card img {
+    height: 35px;
+    display: none;
+  }
+  .slick-prev, .slick-next {
+    top: 25%;
+  }
+  .card-finalca-rrossel .card-fin {
+    margin-top: 5rem;
+  }
+  .titulo-card {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+  }
+  .area-cont-card p {
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box!important;
+  }
+  .img-banner-footer {
+    margin-top: 0;
+    margin-bottom: 4rem;
+  }
+  .conteudo-d-evento {
+    margin-top: 0;
+  }
+  .logo-menu-dois {
+    position: absolute;
+    z-index: 10;
+  }
+  .card-evento-img {
+    border-radius: 10px 10px 5px 5px;
+  }
+  .card-evento {
+    border-radius: 10px;
+  }
+  .foto-redo-art {
+    width: 200px;
+    height: 200px;
+  }
+  .dados-pag-artista {
+    margin-top: 7rem;
+  }
+  #accordionSetores {
+    max-height: 100vh;
+    overflow: auto;
+    margin: 1rem 0;
+  }
+}
+@media(min-width: 601px) {
+  #carrouselBanerEvento .carousel-caption {
+    left: 3rem;
+    bottom: 3rem;
+  }
+  .img-banner-carrosel,
+  #carrouselBanerEvento .carousel-item {
+    border-radius: 24px;
+  }
+  .carousel-control-prev {
+    left: auto;
+    justify-content: center;
+    align-items: end;
+  }
+  .carousel-control-next {
+    right: 3rem;
+    justify-content: center;
+    align-items: end;
+  }
+  .area-alert-ing {
+    padding: 1rem;
+  }
+  .btn-alerta-ing {
+    min-width: 161px;
+  }
+  #pills-pag-selec .nav-link {
+    min-width: 255px;
+  }
+  .carousel-caption {
+    padding: 32px;
+  }
+  .banner-data-btn {
+    display: grid;
+    justify-content: end;
+    align-items: center;
+  }
+  .card-evento {
+    margin: 20px;
+  }
+  .card-evento-img {
+    min-height: 220px;
+  }
+  .card-finalca-rrossel .card-fin {
+    height: 100%;
+    margin: 20px;
+  }
+  /*.titulo-card {
+    min-height: 54px;
+  }*/
+  .card-evento {
+    min-height: 330px;
+    height: auto !important;
+    /*max-height: 345px;*/
+  }
+  .hover-cards-pos {
+    margin: 3rem auto;
+  }
+  .img-banner-footer {
+    margin: 5rem auto;
+  }
+  .conteudo-d-evento {
+    margin-top: 3rem;
+  }
+  .card-evento-img {
+    border-radius: 26px 26px 5px 5px;
+  }
+  .card-evento {
+    border-radius: 24px;
+  }
+  .foto-redo-art {
+    width: 280px;
+    height: 280px;
+  }
+  .m-top-corrig {
+    margin-top: 9rem;
+  }
+}
+
+/* AJUSTA FONT-SIZE */
+@media(max-width: 600px) {
+  #carrouselBanerEvento .carousel-caption h5,
+  .area-alert-ing h3,
+  .area-data-hor .valores-ing,
+  .titulo-evento-1 {
+    font-size: 24px;
+  }
+  .titulo-ing-sele h4 {
+    font-size: 18px;
+  }
+  .nome-artista {
+    font-size: 12px;
+  }
+  .titulo-card {
+    font-size: 14px;
+  }
+  .card-evento p {
+    font-size: 12px;
+  }
+  .titulo-artistas {
+    font-size: 24px;
+  }
+  .dados-pag-artista h3 {
+    font-size: 25px;
+  } 
+  .val-la-taxa {
+    font-size: 14px;
+  }
+  .carousel-caption {
+    border-radius: 0px 0px 24px 24px;
+  }
+  footer ul li {
+    margin-bottom: 10px;
+  }
+  footer h4 {
+    margin-bottom: 2rem;
+  }
+}
+@media(min-width: 601px) {
+  #carrouselBanerEvento .carousel-caption h5,
+  .area-alert-ing h3,
+  .area-data-hor .valores-ing {
+    font-size: 32px;
+  }
+  .carousel-caption {
+  border-radius: 24px;
+  }
+  .titulo-evento-1 {
+    font-size: 36px;
+  }
+  .titulo-ing-sele h4 {
+    font-size: 16px;
+  }
+  .nome-artista {
+    font-size: 16px;
+  }
+  .titulo-card {
+    font-size: 16px;
+  }
+  .card-evento p {
+    font-size: 14px;
+  }
+  .card-evento p img {
+    margin-right: 10px;
+  }
+  .titulo-artistas {
+    font-size: 32px;
+  } 
+  .dados-pag-artista h3 {
+    font-size: 48px;
+  }
+  .val-la-taxa {
+    font-size: 20px;
+  }
+  footer ul li {
+    margin-bottom: 2rem;
+  }
+  footer h4 {
+    margin-bottom: 3rem;
+  }
+}

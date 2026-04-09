@@ -1,0 +1,7 @@
+body.perto_high_contrast_clear div:nth-child(1) > div > div.col-md-6  {
+    background-color: #253D4F !important;
+}
+
+body.perto_high_contrast_clear footer span:not(#id-fantasma-especificidade) {
+    background-color: initial !important;
+}
